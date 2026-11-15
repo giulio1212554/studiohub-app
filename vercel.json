@@ -1,0 +1,23 @@
+{
+  "buildCommand": "git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME/flutter && export PATH=\"$HOME/flutter/bin:$PATH\" && flutter config --no-analytics && flutter config --enable-web && flutter pub get && flutter build web --release --pwa-strategy=offline-first",
+  "outputDirectory": "build/web",
+  "installCommand": "echo 'Flutter will install during build'",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/flutter_service_worker.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/manifest.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/manifest+json" }
+      ]
+    }
+  ]
+}
